@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: ECHOHUB Clearing House Portal  
+  title: ECHOHUB WebPay Portal  
   contact:
     email: Echo_Crhc@echohealthinc.com
     url: 'https://echohubDocumentation@echohealthinc.com'
@@ -33,44 +33,15 @@ paths:
   #Authorization
   /api/Authentication/v1/Authentication:
     $ref: paths/Authentication/api@RequestAuthentication@V1.yaml
-    #ClearingHousePotal 
-  /api/ClearingHouse/v1/Portal [Register User]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@RegisterUser.yaml
-  /api/ClearingHouse/v1/Portal [Validate User]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@ValidateUser.yaml
-  /api/ClearingHouse/v1/Portal [Get Clearing House By Domain]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetCHByDomain.yaml
-  /api/ClearingHouse/v1/Portal [Send an email]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@SendEmail.yaml
-  /api/ClearingHouse/v1/Portal [Validate an email]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@ValidateEmail.yaml
-  /api/ClearingHouse/v1/Portal [Approve Pending User Registration]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@ApprovePendingUserRegistartion.yaml
-  /api/ClearingHouse/v1/Portal [Check on Create Password Link Expiry]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@CheckPasswordLinkExpiry.yaml
-  /api/ClearingHouse/v1/Portal [Create Password]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@CreatePassword.yaml
-  /api/ClearingHouse/v1/Portal [Decline Pending User Registration]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@DeclinePendingUserRegistration.yaml
-  /api/ClearingHouse/v1/Portal [Get All Pending User Registration]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetAllPendingUserRegistration.yaml
-  /api/ClearingHouse/v1/Portal [Create CH Admin]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@CreateCHAdmin.yaml
-  /api/ClearingHouse/v1/Portal [Get CH Admin Details By Registration Key]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetCHAdminByRegistrationKey.yaml
-  /api/ClearingHouse/v1/Portal [Get CH Admin Details By Id]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetCHAdminDetailsByID.yaml
-  /api/ClearingHouse/v1/Portal [Get All CH Admin Requests]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetAllCHAdminRequests.yaml
-  /api/ClearingHouse/v1/Portal [Delete CH Admin]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@DeleteCHAdmin.yaml
-  /api/ClearingHouse/v1/Portal [Get Build Version]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetBuildVersion.yaml
-  /api/ClearingHouse/v1/Portal [Get Active CH By User Name]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@GetActiveCHByUserName.yaml
-  /api/ClearingHouse/v1/Portal [Register CH Admin]:
-    $ref: paths/ClearingHousePortal/api@ClearingHouse@v1@RegisterCHAdmin.yaml
-      
+  #WebPay
+  /api/DirectPay/v1/WebPay [Create Process]:
+    $ref: paths/WebPay/api@v1@WebPayCreateProcess.yaml
+  /api/DirectPay/v1/WebPay [Cancel Process]:
+    $ref: paths/WebPay/api@v1@WebPayCancelProcess.yaml
+  /api/DirectPay/v1/WebPay [Create Payment]:
+    $ref: paths/WebPay/api@v1@WebPayCreatePayment.yaml  
+  /api/DirectPay/v1/WebPay [Submitted Process]:
+    $ref: paths/WebPay/api@v1@WebPaySubmittedProcess.yaml   
 components:
   securitySchemes:
     x-ApiKey:
@@ -95,9 +66,17 @@ tags:
     description: |
       This endpoint helps to generate the Authorization Token for accessing the endpoints. 
       #Clearing House Portal
-   #Clearing House Portal   
-  - name: Clearinghouse Portal 
+   #WebPay
+  - name: WebPay
     description: |
-     A clearinghouse functions as an intermediary for the transactions between healthcare providers and insurance payers. The clearinghouse is imperative to the processing of all medical claims and records electronically to ensure a faster turnaround on claim processing. 
-     ECHO’s clearinghouse portal is a website that allows clearinghouses to check EFT (Electronic Funds Transfer)/ERA (Electronic Remittance Advice) enrollment status for their providers. The portal also provides the bulk EFT and ERA status reports and reposts missing 835 files to the clearinghouse directory.
-     The clearinghouse portal controls clearinghouse access by managing user access and limiting users to only the data pertinent to their company. The portal also establishes the domains associated with the clearinghouse, as well as IP ranges where possible. 
+      WebPay is a PCI-compliant online service that allows users to access a third-party website and set up one-time and/or recurring payments to their Direct to Debit card, Venmo, Zelle, or bank account. A token that has a unique ID is assigned for each WebPay session and it will have a time-out limit if there is inactivity in the browser.  
+      
+      Web payments make checkout easy for the user, by reusing stored card/account information and eliminating the need for the user to fill in checkout forms.  
+      
+      The UI is implemented by the browser, and users see a familiar and consistent checkout experience on any website that uses the standard.  
+      
+      WebPay has four endpoints:
+      * WebPay - Create process
+      * WebPay - Create Payment
+      * WebPay - Cancel Process
+      * WebPay - Submitted Process
